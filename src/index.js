@@ -1,34 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("create-task-form");
-  const taskList = document.getElementById("tasks");
+/*  */
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById('create-task-form');
 
-  form.addEventListener("submit", function(event) {
+  form.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const taskDescription = document.getElementById("new-task-description").value;
-    const priority = document.getElementById("priority").value;
+    const taskInput = document.getElementById('new-task-description');
+    const taskDescription = taskInput.value;
 
-    const taskItem = document.createElement("li");
-    taskItem.textContent = taskDescription;
+    const taskList = document.getElementById('tasks');
+    const newTask = document.createElement('li');
+    newTask.textContent = taskDescription;
 
-    // Set the color based on priority
-    if (priority === "high") {
-      taskItem.style.color = "red";
-    } else if (priority === "medium") {
-      taskItem.style.color = "yellow";
-    } else if (priority === "low") {
-      taskItem.style.color = "green";
-    }
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", function() {
-      taskItem.remove();
+    // Add a delete button
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function() {
+      newTask.remove();
     });
+    newTask.appendChild(deleteButton);
 
-    taskItem.appendChild(deleteButton);
-    taskList.appendChild(taskItem);
+    taskList.appendChild(newTask);
 
-    document.getElementById("new-task-description").value = "";
+    // Clear the input field
+    taskInput.value = '';
   });
 });
